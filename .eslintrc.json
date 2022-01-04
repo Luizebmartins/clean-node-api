@@ -14,11 +14,13 @@
     ],
     "rules": {
         "semi": ["error", "never"],
+        "treatUndefinedAsUnspecified": true,
         "max-classes-per-file": [
             "error",
             { "ignoreExpressions": true, "max": 100 }
         ],
         "class-methods-use-this": ["error", { "exceptMethods": ["route"] }]
+        
     }
 }
   
