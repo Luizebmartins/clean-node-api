@@ -12,5 +12,7 @@ module.exports = class LoginRouter {
     if (!password) {
       return HttpResponse.badRequest('password')
     }
+
+    return true
   }
 }
