@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641403478300" clover="3.2.0">
-  <project timestamp="1641403478300" name="All files">
-    <metrics statements="68" coveredstatements="68" conditionals="19" coveredconditionals="19" methods="8" coveredmethods="8" elements="95" coveredelements="95" complexity="0" loc="68" ncloc="68" packages="2" files="4" classes="4"/>
+<coverage generated="1641403648591" clover="3.2.0">
+  <project timestamp="1641403648592" name="All files">
+    <metrics statements="70" coveredstatements="70" conditionals="19" coveredconditionals="19" methods="8" coveredmethods="8" elements="97" coveredelements="97" complexity="0" loc="70" ncloc="70" packages="2" files="4" classes="4"/>
     <package name="helpers">
-      <metrics statements="42" coveredstatements="42" conditionals="6" coveredconditionals="6" methods="6" coveredmethods="6"/>
+      <metrics statements="44" coveredstatements="44" conditionals="6" coveredconditionals="6" methods="6" coveredmethods="6"/>
       <file name="http-response.js" path="/home/luiz/Documents/Cursos/clean-node-api/src/presentation/helpers/http-response.js">
-        <metrics statements="30" coveredstatements="30" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
+        <metrics statements="32" coveredstatements="32" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -35,7 +35,9 @@
         <line num="27" count="2" type="stmt"/>
         <line num="28" count="2" type="stmt"/>
         <line num="29" count="2" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
       </file>
       <file name="missing-param-error.js" path="/home/luiz/Documents/Cursos/clean-node-api/src/presentation/helpers/missing-param-error.js">
         <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
