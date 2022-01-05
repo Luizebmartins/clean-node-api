@@ -1,8 +1,9 @@
 const LoginRouter = require('./login-router')
 const MissingParamError = require('../helpers/missing-param-error')
 const UnauthozedError = require('../helpers/unathorized-error')
+const ServerError = require('../helpers/server-error')
 
-const makeSut = () => {
+const makeAuthUseCase = () => {
   class AuthUseCaseSpy {
     auth(email, password) {
       this.email = email
@@ -10,8 +11,20 @@ const makeSut = () => {
       return this.accessToken
     }
   }
+  return new AuthUseCaseSpy()
+}
 
-  const authUseCaseSpy = new AuthUseCaseSpy()
+const makeAuthUseCaseWithError = () => {
+  class AuthUseCaseSpy {
+    static auth() {
+      throw new Error()
+    }
+  }
+  return new AuthUseCaseSpy()
+}
+
+const makeSut = () => {
+  const authUseCaseSpy = makeAuthUseCase()
   authUseCaseSpy.accessToken = 'valid_token'
   const sut = new LoginRouter(authUseCaseSpy)
   return {
@@ -49,13 +62,15 @@ describe('Login router', () => {
     const { sut } = makeSut()
     const httpResponse = sut.route()
     expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
   })
 
   test('Should return 500 if no httpRequest has no body', () => {
     const { sut } = makeSut()
     const httpRequest = {}
-    const httResponse = sut.route(httpRequest)
-    expect(httResponse.statusCode).toBe(500)
+    const httpResponse = sut.route(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
   })
 
   test('Should call AuthUseCase eith correct params', () => {
@@ -113,11 +128,28 @@ describe('Login router', () => {
 
     const httpResponse = sut.route(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
   })
 
   test('Should return 500 if no AuthUseCase has no auth method', () => {
     class AuthUseCaseSpy {}
     const authUseCaseSpy = new AuthUseCaseSpy()
+    const sut = new LoginRouter(authUseCaseSpy)
+
+    const httpRequest = {
+      body: {
+        email: 'any@email',
+        password: 'any',
+      },
+    }
+
+    const httpResponse = sut.route(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
+  })
+
+  test('Should return 500 if no AuthUseCase throws', () => {
+    const authUseCaseSpy = makeAuthUseCaseWithError()
     const sut = new LoginRouter(authUseCaseSpy)
 
     const httpRequest = {
